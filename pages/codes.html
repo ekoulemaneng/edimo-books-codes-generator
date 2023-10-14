@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Codes</title>
+        <link href='css/codes.css' rel='stylesheet'>
+    </head>
+    <body>
+        <h1>Edimo Book Codes</h1>
+        <h2>Générateur de codes</h2>
+        <div id='main'>
+            <div id='left-div'>
+                <fieldset>
+                    <label for='numberOfCodes'>Nombre de codes: <input id='numberOfCodes' type='number' min='1'></label>
+                </fieldset>
+                <fieldset>
+                    <label for='colored'>Couleur <input id='colored' type='radio' name='booktype'></label>
+                    <label for='blackwhite'>Noir et blanc <input id='blackwhite' type='radio' name='booktype'></label>
+                </fieldset>
+                <button id='submit'>Générez</button>
+                <p id='inputs-validation'></p>
+            </div>
+            <div id='right-div'>
+                <table>
+                    <thead>
+                        <th class='number'>N°</th>
+                        <th class='code'>Codes</th>
+                    </thead>
+                    <tbody id='tbody'></tbody>
+                </table>
+            </div>
+        </div>
+        <button id='logout'>Deconnexion</button>
+        <script type='module' src='js/codes.js'></script>
+    </body>
+</html>

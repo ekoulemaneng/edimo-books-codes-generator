@@ -1,0 +1,60 @@
+h1, p {
+    text-align: center;
+}
+
+h1 {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+div {
+    min-width: 15%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+#intro {
+    font-weight: bold;
+    font-size: larger;
+    text-transform: uppercase;
+}
+
+#inputs-validation {
+    color: red;
+}
+
+label, input, button {
+    display: block;
+    width: 100%;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+input {
+    font-size: 15px;
+    padding: 3px;
+}
+
+button {
+    margin-top: 20px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: 1px solid transparent;
+}
+
+button:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
+
+
+
