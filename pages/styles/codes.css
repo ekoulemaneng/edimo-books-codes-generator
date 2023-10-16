@@ -37,6 +37,10 @@ label {
     margin-bottom: 5px;
 }
 
+fieldset > label {
+    display: block;
+}
+
 input {
     font-size: 15px;
     padding: 3px;
