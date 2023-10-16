@@ -5,10 +5,7 @@ const config = {
     port: process.env.PORT,
     admin_username: process.env.ADMIN_USERNAME,
     admin_password: process.env.ADMIN_PASSWORD,
-    saltRounds: parseInt(process.env.BCRYPT_SALT_ROUNDS),
-    node_env: process.env.NODE_ENV,
-    devHostname: 'http://127.0.0.1:3000',
-    prodHostname: ''
+    saltRounds: parseInt(process.env.BCRYPT_SALT_ROUNDS)
 }
 
 module.exports = config

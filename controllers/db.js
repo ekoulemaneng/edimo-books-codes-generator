@@ -9,7 +9,7 @@ const db = open({ filename: './database/db.sqlite', driver: sqlite3.Database })
 exports.openDB = async () => {
     try {
         console.log('Connected to database.')
-        return db 
+        return await db 
     } 
     catch (error) {
         console.error(error)
@@ -29,7 +29,7 @@ exports.addAdminAtStart = async () => {
 
 exports.createCodesTable = async () => {
     try {
-        await (await db).run('CREATE TABLE IF NOT EXISTS codes (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT UNIQUE NOT NULL, type TEXT NOT NULL);')
+        await (await db).run('CREATE TABLE IF NOT EXISTS codes (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT UNIQUE NOT NULL, book_title TEXT NOT NULL);')
     } 
     catch (error) {
         console.error(error)
@@ -48,22 +48,23 @@ exports.checkLoginCredentials = async (username, password) => {
     }
 }
 
-exports.getCodesGenerated = async (n, type) => {
+exports.getCodesGenerated = async (n, short_title) => {
     try {
-        let sql = 'INSERT INTO codes (code, type) VALUES '
+        let sql = 'INSERT INTO codes (code, book_title) VALUES '
         const strings = []
         while (strings.length < n) {
-            let str = codeBuilder(type)
+            let str = codeBuilder(short_title)
             let code = await (await db).get('SELECT * FROM codes WHERE code = ?;', [str])
             while (code) {
-                str = codeBuilder(type)
+                str = codeBuilder(short_title)
                 code = await (await db).get('SELECT * FROM codes WHERE code = ?;', [str])
             }
             strings.push(str)
         }
+        const book_title = short_title === 'cf' ? 'Connaissances fondamentales' : 'Aspects pratiques'
         for (let i = 0; i < strings.length; i++) {
-            if (i < strings.length - 1) sql += `("${strings[i]}", "${type}"), `
-            else sql += `("${strings[i]}", "${type}");`
+            if (i < strings.length - 1) sql += `("${strings[i]}", "${book_title}"), `
+            else sql += `("${strings[i]}", "${book_title}");`
         }
         await (await db).run(sql)
         return strings

@@ -1,6 +1,6 @@
 const numberOfCodesInputElement = document.getElementById('numberOfCodes')
-const coloredRadioButtonInputElement = document.getElementById('colored')
-const balckWhiteRadioButtonInputElement = document.getElementById('blackwhite')
+const cfRadioButtonInputElement = document.getElementById('cf')
+const apRadioButtonInputElement = document.getElementById('ap')
 const submitButtonElement = document.getElementById('submit')
 const inputsValidationElement = document.getElementById('inputs-validation')
 const logoutButtonElement = document.getElementById('logout')
@@ -14,7 +14,7 @@ const inputsValidator = () => {
         inputsValidationElement.textContent = 'Vous devez fournir un entier comme de nombre de codes.'
         return false
     }
-    else if (!coloredRadioButtonInputElement.checked && !balckWhiteRadioButtonInputElement.checked) {
+    else if (!cfRadioButtonInputElement.checked && !apRadioButtonInputElement.checked) {
         inputsValidationElement.textContent = 'Vous devez fournir le type de livre (couleur ou noir/blanc).'
         return false
     }
@@ -45,15 +45,16 @@ const inputsHandler = async (e) => {
         if (inputsValidator()) {
             inputsValidationElement.textContent = ''
             const numberOfCodes = parseInt(numberOfCodesInputElement.value)
-            let bookType = 'colored'
-            if (coloredRadioButtonInputElement.checked) {}
-            else if (balckWhiteRadioButtonInputElement.checked) bookType = 'not-colored'
+            let short_title = 'cf'
+            if (cfRadioButtonInputElement.checked) {}
+            else if (apRadioButtonInputElement.checked) short_title = 'ap'
             const options = {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }
-            const response = await fetch(`/items?n=${numberOfCodes}&type=${bookType}`, options)
+            console.log(short_title)
+            const response = await fetch(`/items?n=${numberOfCodes}&title=${short_title}`, options)
             const payload = await response.json()
             if (response.ok) insertRows(payload.data)
             else window.location.replace('/')

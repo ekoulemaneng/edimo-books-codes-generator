@@ -11,15 +11,15 @@ exports.getLoginResponse = async (req, res) => {
         res.json({ redirect: `/codes`})
     } 
     catch (error) {
-        console.error(error)
+        console.error(error) 
     }
 }
 
 exports.getItemsResponse = async (req, res) => {
     try {
         if (!req.session.authenticated) return res.status(401).json({ redirect: '/' })
-        const { n, type } = req.query
-        res.json({ data: await getCodesGenerated(n, type), type })
+        const { n, title } = req.query
+        res.json({ data: await getCodesGenerated(n, title), book_title: title === 'cf' ? 'Connaissances fondamentales' : 'Aspects pratiques' })
     } 
     catch (error) {
         console.error(error)
